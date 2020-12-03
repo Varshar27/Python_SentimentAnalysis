@@ -1,0 +1,121 @@
+﻿ {% extends "admin.html" %}
+
+{% block content %}
+    <h1>Emotional Acceptance Category</h1>
+    <form action="/postreport4" method="post">
+        <input type="hidden" id="sku_id" value="{{sku}}" />
+
+        <input type="hidden" id="pg" value="{{nogp}}" />
+        <input type="hidden" id="dataarray" value="{{dataarray}}" />
+        <input type="hidden" id="sdataarray" value="{{sdataarray}}" />
+        <div class="row">
+            <div class=" col-md-3">
+                Select Category
+                <select name="sku" id="sku" class="form-control" data-validation="required">
+                    {% for row in categories %}
+                    <option value="{{row[0]}}">{{row[1]}} - {{row[2]}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class=" col-md-3">
+                <input type="Submit" class="btn btn-primary" value="Search" />
+            </div>
+        </div>
+
+        <div class="row" style="padding-top:80px;padding-bottom:40px">
+            <div class="col-md-6">
+                <div id="container"></div>
+            </div>
+            <div class="col-md-6">
+                <div id="container1"></div>
+            </div>
+        </div>
+
+
+    </form>
+{% endblock %}
+
+
+{% block scripts %}
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<script>
+    $.validate();
+    $(document).ready(function () {
+     var sku_id = $('#sku_id').val();
+        if (sku_id !== "") {
+            $('#sku').val(sku_id);
+        }
+    if ($("#pg").val() == '0') {
+        Highcharts.chart('container', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Emotional Acceptance Category Based'
+    },
+    xAxis: {
+        categories: ['<-2', '-2 to -1', '-1 to 1', '1 to 2', '< 2'],
+        title: {
+                    text: 'Polarity'
+        },
+    },
+    yAxis: {
+        min: 0,
+        title: {
+                    text: 'Frequency'
+        },
+
+    },
+    tooltip: {
+        pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
+        shared: true
+    },
+    plotOptions: {
+        column: {
+            stacking: 'percent'
+        }
+    },
+    series:JSON.parse( $("#dataarray").val()),
+        });
+
+           Highcharts.chart('container1', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Subjectivity Category Based'
+    },
+    xAxis: {
+        title: {
+                    text: 'Subjectivity'
+        },
+        categories: ['<-2', '-2 to -1', '-1 to 1', '1 to 2', '< 2']
+    },
+    yAxis: {
+        title: {
+                    text: 'Frequency'
+        },
+        min: 0,
+
+    },
+    tooltip: {
+        pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
+        shared: true
+    },
+    plotOptions: {
+        column: {
+            stacking: 'percent'
+        }
+    },
+    series:JSON.parse( $("#sdataarray").val()),
+});
+
+        }
+            });
+
+</script>
+{% endblock %}

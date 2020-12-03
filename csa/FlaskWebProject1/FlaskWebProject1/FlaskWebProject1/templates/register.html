@@ -1,0 +1,77 @@
+﻿ {% extends "layout.html" %}
+
+{% block content %}
+<form action="/register" method="POST">
+    <div class="row" style="padding-top:80px;padding-bottom:80px">
+        <div class="col-md-4 col-lg-4">
+            <div class="form-group">
+                <label for="pwd">Name:</label>
+                <input type="text" class="form-control" data-validation="required" name="name">
+            </div>
+            <div class="form-group">
+                <label for="pwd">Address Line:</label>
+                <input type="text" class="form-control" data-validation=" required" name="address">
+            </div>
+            <div class="form-group">
+                <label for="pwd">Zipcode:</label>
+                <input type="text" class="form-control" data-validation="required" name="zipcode">
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-4">
+            <div class="form-group">
+                <label for="pwd">Email:</label>
+                <input type="text" class="form-control" data-validation="required email" name="email">
+            </div>
+            <div class="form-group">
+                <label for="pwd">Password:</label>
+                <input type="password" class="form-control" data-validation="required" name="password" id="password">
+            </div>
+            <div class="form-group">
+                <label for="pwd">Confirm Password:</label>
+                <input type="password" class="form-control" data-validation="confirmation" data-validation-confirm="password" name="cpassword" id="cpassword">
+            </div>
+        </div>
+
+        <div class="col-md-4 col-lg-4">
+            <div class="form-group">
+                <label for="pwd">City:</label>
+                <input type="text" class="form-control" data-validation="required" name="city">
+            </div>
+            <div class="form-group">
+                <label for="pwd">State:</label>
+                <input type="text" class="form-control" data-validation="required" name="state" id="state">
+            </div>
+            <div class="form-group">
+                <label for="pwd">Country:</label>
+                <select name="country" class="form-control" data-validation=" required">
+                    <option value="">Select</option>
+                    {% for con in countries %}
+                    <option value="{{con[0]}}">{{con[1]}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+
+    </div>
+    <input type="submit" class="btn btn-primary" value="Register">
+
+
+</form>
+ {% if success == 'ok' %}
+
+<div class="alert alert-success">
+    <strong>Registration Success </strong> You should <a href="/login" class="btn btn-warning">Login here</a>.
+</div>
+   {% endif %}
+
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $.validate({
+        modules: 'security'
+    });
+</script>
+{% endblock %}

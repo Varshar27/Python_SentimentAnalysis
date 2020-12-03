@@ -1,0 +1,29 @@
+﻿ {% extends "layout.html" %}
+
+{% block content %}
+<form action="/loginpost" method="POST">
+    <div class="row" style="padding-top:80px;padding-bottom:80px">
+        <div class="col-md-4 col-lg-4">
+            <div class="form-group">
+                <label for="pwd">Email:</label>
+                <input type="text" class="form-control" data-validation="required email" name="email"/>
+            </div>
+            <div class="form-group">
+                <label for="pwd">Password:</label>
+                <input type="password" class="form-control" data-validation="required" name="password"/>
+            </div>
+            <div class="form-error">{{error}}</div>
+        </div>
+    </div>
+    <input type="submit" class="btn btn-primary" value="Login">
+
+    <a href="{{ url_for('registeration') }}" class="btn btn-warning">Register here</a>
+</form>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $.validate();
+</script>
+{% endblock %}

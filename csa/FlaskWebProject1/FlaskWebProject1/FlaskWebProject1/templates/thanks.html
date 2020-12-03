@@ -1,0 +1,19 @@
+﻿   {% extends "layout.html" %}
+
+{% block content %}
+
+
+<form action="/postcategory" method="POST">
+    <div class="row" style="padding-top:80px;padding-bottom:80px">
+        <h3>Thank you for submitting review </h3>
+    </div>
+
+</form>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $.validate();
+</script>
+{% endblock %}

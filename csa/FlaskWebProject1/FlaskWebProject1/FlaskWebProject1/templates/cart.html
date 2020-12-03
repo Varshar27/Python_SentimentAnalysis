@@ -1,0 +1,91 @@
+﻿  {% extends "layout.html" %}
+
+{% block content %}
+
+<h3></h3>
+<style>
+    .product {
+        background: #ccc;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+        .product > div.image {
+            overflow: hidden;
+            position: relative;
+            display: inline-block;
+        }
+</style>
+<form action="/postcart" method="POST"> 
+    <div class="row" style="padding-top:10px;padding-bottom:10px">
+         <input type="hidden" id="hiddcategory" value="{{category}}"/>
+        <div class="col-md-3 col-lg-3">
+            <div class="form-group">
+                <label for="pwd">Category:</label>
+                <select name="category" id="category" class="form-control">
+                    {% for row in categories %}
+                    <option value="{{row[0]}}">{{row[1]}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <input type="submit" name="action" class="btn btn-primary pull-right" value="Search">
+        </div>
+        <div class="col-md-9 col-lg-9 " style="padding:0px">
+            <div class="row" style="padding:12px">
+                <input type="submit" name="action" class="btn btn-primary pull-right" value="Complete Purchase">
+                <br />
+                </div>
+                <div class="row">
+                    {% for row in products %}
+
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 prod">
+                        <div class="product">
+                            <div class="image hover_img">
+                                <a href="/index.php?route=product/product&amp;product_id=48">
+                                    <img class="additional_image" style="height:200px" src="/static/uploads/{{row[3]}}">
+                                </a>
+                            </div>
+
+                            <div class="actions clearfix">
+                                <div class="name">
+                                    <div>
+                                        <a href="/index.php?route=product/product&amp;product_id=48">{{row[1]}}</a>
+                                    </div>
+                                </div>
+                                <div class="description">
+                                    Origin: {{row[6]}}
+                                </div>
+                                <div class="description">
+                                    Details: {{row[4]}}
+                                </div>
+                                <div class="price">
+                                    <p>Price : {{row[5]}}</p>
+                                </div>
+                                Buy <input type="checkbox" name="chk" value="{{row[0]}}" />
+
+                            </div>
+                        </div>
+                    </div>
+
+                    {% endfor %}
+                </div>
+                <input type="submit" name="action" class="btn btn-primary pull-right" value="Complete Purchase">
+            </div>
+
+        </div>
+
+</form>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $.validate();
+    $(document).ready(function () {
+        if ($("#hiddcategory").val()!='0')
+        $("#category").val($("#hiddcategory").val());
+    })
+</script>
+{% endblock %}

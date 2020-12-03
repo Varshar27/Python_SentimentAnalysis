@@ -1,0 +1,139 @@
+﻿ {% extends "admin.html" %}
+
+{% block content %}
+    <form action="/postreport2" method="post">
+        <input type="hidden" id="pg" value="{{nogp}}" />
+        <input type="hidden" id="sku_id" value="{{sku}}" />
+        <input type="hidden" id="datanewcus" value="{{datanewcus}}" />
+        <input type="hidden" id="dataexistingcus" value="{{dataexistingcus}}" />
+        <input type="hidden" id="ndatanewcus" value="{{ndatanewcus}}" />
+
+        <h3>
+            Value for money
+        </h3>
+        <div class="row">
+
+            <div class=" col-md-3">
+                Select Item
+                <select name="sku" id="sku" class="form-control" data-validation="required">
+                    {% for row in products %}
+                    <option value="{{row[0]}}">{{row[1]}} - {{row[2]}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class=" col-md-3">
+                <input type="Submit" class="btn btn-primary" value="Search" />
+            </div>
+        </div>
+        <div class="row" style="padding-top:80px;padding-bottom:40px">
+            <div class="col-md-6">
+                <div id="newcus"></div>
+            </div>
+            <div class="col-md-6">
+                <div id="excus"></div>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+
+
+        {% block scripts %}
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<script>
+    $.validate();
+    $(document).ready(function () {
+    var sku_id = $('#sku_id').val();
+        if (sku_id !== "") {
+            $('#sku').val(sku_id);
+        }
+        if ($("#pg").val() == '0') {
+
+            Highcharts.chart('newcus', {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'From Feedback'
+                },
+                xAxis: {
+                    type: 'category',
+                     title: {
+                     text: 'Origin'
+                     },
+                    labels: {
+                        rotation: -45,
+                        style: {
+                            fontSize: '13px',
+                            fontFamily: 'Verdana, sans-serif'
+                        }
+                    }
+                },
+                
+                legend: {
+                    enabled: false
+                },
+                yAxis: {
+                  min: 0,
+                  title: {
+                    text: 'Value for money'
+                  }
+                },
+                series: [{
+                    name: 'Value for money',
+                    data: JSON.parse($("#datanewcus").val()),
+                    dataLabels: {
+                        enabled: true,
+                        rotation: -90,
+                        color: '#FFFFFF',
+                        align: 'right',
+                        format: '{point.y:.1f}', // one decimal
+                        y: 10, // 10 pixels down from the top
+                        style: {
+                            fontSize: '13px',
+                            fontFamily: 'Verdana, sans-serif'
+                        }
+                    }
+                }]
+            });
+
+            Highcharts.chart('excus', {
+                chart: {
+                    type: 'column'
+                },
+                 xAxis: {
+                    type: 'category',
+                     title: {
+                     text: 'Origin'
+                     },
+                    labels: {
+                        rotation: -45,
+                        style: {
+                            fontSize: '13px',
+                            fontFamily: 'Verdana, sans-serif'
+                        }
+                    }
+                },
+                yAxis: {
+                  min: 0,
+                  title: {
+                    text: 'Value for money'
+                  }
+                },
+                title: {
+                    text: 'Calculated Value for Money'
+                },
+                
+                credits: {
+                    enabled: false
+                },
+                series:  JSON.parse($("#ndatanewcus").val()),
+            });
+
+        }
+    });
+
+</script>
+        {% endblock %}

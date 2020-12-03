@@ -1,0 +1,35 @@
+﻿{% extends "admin.html" %}
+
+{% block content %} 
+<h3>Products</h3>
+    <a href="{{ url_for('addproduct') }}" class="btn btn-primary pull-right" >Add Product</a>
+    <div class="row" style="padding-top:80px;padding-bottom:80px">
+        <div class="col-md-8 col-lg-8">
+            <table class="table ">
+                <tr>
+                    <td>
+                        Name
+                    </td>
+                    <td>SKU</td> 
+                </tr>
+                {% for row in products %}
+
+                <tr>
+                    <td>
+                        {{row[1]}}
+                    </td>
+                    <td>{{row[2]}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div> 
+    </div>
+ 
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $.validate();
+</script>
+{% endblock %}

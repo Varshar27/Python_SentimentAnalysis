@@ -1,0 +1,38 @@
+﻿  {% extends "admin.html" %}
+
+{% block content %}
+
+    <h3>Categories</h3>
+    <form action="/postcategory" method="POST">
+        <div class="row" style="padding-top:80px;padding-bottom:80px">
+            <div class="col-md-8 col-lg-8">
+                <table class="table ">
+                    <tr>
+                        <td>Category</td>
+                    </tr>
+                    {% for row in categories %}
+                    
+                    <tr>
+                        <td>{{row[1]}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <div class="col-md-4 col-lg-4">
+                <div class="form-group">
+                    <label for="pwd">Name:</label>
+                    <input type="text" class="form-control" data-validation="required" name="name" />
+                </div>
+                <input type="submit" class="btn btn-primary" value="Save">
+            </div>
+        </div>
+       
+    </form>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $.validate();
+</script>
+{% endblock %}

@@ -1,0 +1,152 @@
+﻿   {% extends "layout.html" %}
+
+{% block content %}
+
+<h3>Feedback</h3>
+<form action="/thanks" method="POST">
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Feedback Section.</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Hey, do you have a minute for some quick feedback?.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Proceed</button>
+                    <button type="submit" class="btn btn-default">Go Back</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>
+    <form action="/postfeedback" method="POST">
+        <input type="hidden" id="id" name="id" value="{{id}}" />
+        <div class="row" style="padding-top:10px;padding-bottom:10px">
+            <div class="col-md-8 col-lg-8">
+                <div class="form-group">
+                    <label for="pwd">
+                        Is it the first time you are buying this item?
+                    </label>
+                    <br />
+                    <input type="radio" value="1" checked="checked" data-validation="required" name="qus0" />Yes
+                    <input type="radio" value="0" data-validation="required" name="qus0" />No
+                </div>
+                <div class="form-group no">
+                    <label for="pwd">
+                        On a scale of 1 to 10, how would you rate the quality of the product?
+                    </label>
+                    <br />
+                    (1 is lowest and 10 is heighest)
+                    <br />
+                    <input type="radio" value="1" checked="checked" data-validation="required" name="qus1" />1
+                    <input type="radio" value="2" data-validation="required" name="qus1" />2
+                    <input type="radio" value="3" data-validation="required" name="qus1" />3
+                    <input type="radio" value="4" data-validation="required" name="qus1" />4
+                    <input type="radio" value="5" data-validation="required" name="qus1" />5
+                    <input type="radio" value="6" data-validation="required" name="qus1" />6
+                    <input type="radio" value="7" data-validation="required" name="qus1" />7
+                    <input type="radio" value="8" data-validation="required" name="qus1" />8
+                    <input type="radio" value="9" data-validation="required" name="qus1" />9
+                    <input type="radio" value="10" data-validation="required" name="qus1" />10
+                </div>
+                <div class="form-group no">
+                    <label for="pwd">
+                        On a scale of 1 to 10, how would you rate the pricing of the product?
+                    </label>
+                    <br />
+                    (1 is lowest and 10 is heighest)
+                    <br />
+                    <input type="radio" value="1" checked="checked" data-validation="required" name="qus2" />1
+                    <input type="radio" value="2" data-validation="required" name="qus2" />2
+                    <input type="radio" value="3" data-validation="required" name="qus2" />3
+                    <input type="radio" value="4" data-validation="required" name="qus2" />4
+                    <input type="radio" value="5" data-validation="required" name="qus2" />5
+                    <input type="radio" value="6" data-validation="required" name="qus2" />6
+                    <input type="radio" value="7" data-validation="required" name="qus2" />7
+                    <input type="radio" value="8" data-validation="required" name="qus2" />8
+                    <input type="radio" value="9" data-validation="required" name="qus2" />9
+                    <input type="radio" value="10" data-validation="required" name="qus2" />10
+                </div>
+                <div class="form-group no">
+                    <label for="pwd">
+                        Are you a regular customer for this product?
+                    </label>
+                    <br />
+                    <input type="radio" value="1" checked="checked" data-validation="required" name="qus3" />Yes
+                    <input type="radio" value="0" data-validation="required" name="qus3" />NO
+                </div>
+                <div class="form-group">
+                    <label for="pwd">
+                        On a scale of 1 to 10, how would you rate the overall value for money for the product compared to its other origins?
+                    </label>
+                    <br />
+                    (1 is lowest and 10 is heighest)
+                    <br />
+                    <input type="radio" value="1" checked="checked" data-validation="required" name="qus4" />1
+                    <input type="radio" value="2" data-validation="required" name="qus4" />2
+                    <input type="radio" value="3" data-validation="required" name="qus4" />3
+                    <input type="radio" value="4" data-validation="required" name="qus4" />4
+                    <input type="radio" value="5" data-validation="required" name="qus4" />5
+                    <input type="radio" value="6" data-validation="required" name="qus4" />6
+                    <input type="radio" value="7" data-validation="required" name="qus4" />7
+                    <input type="radio" value="8" data-validation="required" name="qus4" />8
+                    <input type="radio" value="9" data-validation="required" name="qus4" />9
+                    <input type="radio" value="10" data-validation="required" name="qus4" />10
+                </div>
+                <div class="form-group yes">
+                    <label for="pwd">
+                        How aesthetically and functionally appealing is the product for you?
+                    </label>
+                    <br />
+                    <input type="radio" value="1" checked="checked" data-validation="required" name="qus5" />1
+                    <input type="radio" value="2" data-validation="required" name="qus5" />2
+                    <input type="radio" value="3" data-validation="required" name="qus5" />3
+                    <input type="radio" value="4" data-validation="required" name="qus5" />4
+                    <input type="radio" value="5" data-validation="required" name="qus5" />5
+                    <input type="radio" value="6" data-validation="required" name="qus5" />6
+                    <input type="radio" value="7" data-validation="required" name="qus5" />7
+                    <input type="radio" value="8" data-validation="required" name="qus5" />8
+                    <input type="radio" value="9" data-validation="required" name="qus5" />9
+                    <input type="radio" value="10" data-validation="required" name="qus5" />10
+                </div>
+                <div class="form-group">
+                    <label for="pwd">
+                        What do you feel about the quality of the product?
+                    </label>
+                    <br />
+                    <textarea class="form-control" name="qus6"></textarea>
+                </div>
+                <input type="submit" name="action" class="btn btn-primary" value="Complete Review">
+            </div>
+        </div>
+
+    </form>
+
+    {% endblock %}
+
+    {% block scripts %}
+    <script>
+        $.validate();
+        $(document).ready(function () {
+             $(".no").hide();
+            $(':radio[name="qus0"]').change(function () {
+                var category = $(this).filter(':checked').val();
+                $(".yes").show();
+                $(".no").show();
+                if (category === '1') {
+                    $(".no").hide();
+                }
+                else {
+                    $(".yes").hide();
+                }
+            });
+            $('#myModal').modal('show');
+        });
+    </script>
+    {% endblock %}
